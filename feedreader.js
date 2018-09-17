@@ -92,8 +92,11 @@ $(function() {
             loadFeed(0, done);
         });
         
-        it('completes work', function() {
+        it('contains at least one single .entry element within. feed container', function(done) {
            const feed = document.querySelector('.feed');
+           expect('.feed').not.toBeNull();
+           expect('.feed a.entry-link article.entry').not.toBeNull();
+           expect('.feed a.entry-link article.entry').toBeDefined();
            expect(feed.children.length > 0).toBe(true);
         });
     });
