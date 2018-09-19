@@ -93,44 +93,38 @@ $(function() {
         });
         
         it('completes work', function() {
-           const feed = document.querySelector('.feed');
-           expect(('feed.children').length > 0).toBe(true);
+           const feed = document.querySelectorAll('.feed .entry');
+           expect(('.feed.children').length > 0).toBe(true);
         });
     });
     /* TODO: Write a new test suite named "New Feed Selection" */
     describe('New Feed Selection', function() {
-        const feed = document.querySelector('.feed');
-        const firstFeed = [];
-        const secondFeed = [];
+        
+        const firstFeed;
+        const secondFeed;
         /* TODO: Write a test that ensures when a new feed is loaded
          * by the loadFeed function that the content actually changes.
          * Remember, loadFeed() is asynchronous.
          */
          beforeEach(function(done) {
-             loadFeed(0);
-             Array.from(feed.children).forEach(function(entry) {
-                 firstFeed.push(entry.innerText);
+          //load 1st RSS Feed
+             loadFeed(1, function() {
+                firstFeed = document.getElementsByClassName('.feed').innerHTML;
+             //load 2nd RSS Feed
+             loadFeed(2, function() {
+                 secondFeed = document.getElementsByClassName('.feed').innerHTML;
+                 done();
              });
-             loadFeed(1, done);
-         }); 
-        
-          beforeEach(function(done) {
-             loadFeed(1);
-             Array.from(feed.children).forEach(function(entry) {
-                 secondFeed.push(entry.innerText);
-             });
-             loadFeed(2, done);
+            });
+             
          });
         
          
         
          it('content changes', function() {
-             Array.from(feed.children).forEach(function(entry,index) {
-                expect(entry.innerText, firstFeed[index], entry.innerText === secondFeed[index]);
-                expect(entry.innerText === firstFeed[index]).toBe(false);
-             });
+             expect(firstFeed).not.toBe(secondFeed);
          });
-   
-});
+    });
+
     
 });
