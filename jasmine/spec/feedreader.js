@@ -100,8 +100,8 @@ $(function() {
     /* TODO: Write a new test suite named "New Feed Selection" */
     describe('New Feed Selection', function() {
         
-        const firstFeed;
-        const secondFeed;
+        let firstFeed;
+        let secondFeed;
         /* TODO: Write a test that ensures when a new feed is loaded
          * by the loadFeed function that the content actually changes.
          * Remember, loadFeed() is asynchronous.
@@ -109,10 +109,10 @@ $(function() {
          beforeEach(function(done) {
           //load 1st RSS Feed
              loadFeed(1, function() {
-                firstFeed = document.getElementsByClassName('.feed').innerHTML;
+                firstFeed = $('.feed').html();
              //load 2nd RSS Feed
              loadFeed(2, function() {
-                 secondFeed = document.getElementsByClassName('.feed').innerHTML;
+                 secondFeed = $('.feed').html();
                  done();
              });
             });
